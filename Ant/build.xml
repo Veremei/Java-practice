@@ -1,0 +1,26 @@
+<project name="FirstAnt" default="all">
+    <target name="make.dirs" description="Make some dirs">
+        <mkdir dir="build" />
+        <mkdir dir="build/classes" />
+    </target>
+    
+    <target name="compile" description="compile java" depends="make.dirs">
+        
+        <javac destdir="build/classes" includeAntRuntime="false">
+            <src path="Package1" />
+        </javac>
+    </target>
+    
+    <target name="make.jar" description="make jar file" depends="compile">
+        <jar destfile="build/make.jar">
+            <fileset dir="build/classes">
+                <include name="**/*.class" />
+            </fileset>
+            <manifest>
+                <attribute name="Main-Class" value="Package1.Main" />
+            </manifest>
+        </jar>
+    </target>
+    
+    <target name="all" description="Do the build" depends="make.jar" />
+</project>
